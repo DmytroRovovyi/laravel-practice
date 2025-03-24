@@ -70,6 +70,7 @@ class UserApiController extends Controller
         if (!$user) {
             return response()->json(['message' => 'User not found'], 404);
         }
+
         $validated = $request->validate([
             'name' => 'required|string|max:255',
             'surname' => 'nullable|string|max:255',
