@@ -11,6 +11,8 @@ use Illuminate\Support\Facades\Validator;
 class UserApiController extends Controller
 {
     /**
+     * Metod create user
+     *
      * @param Request $request
      * @return \Illuminate\Http\JsonResponse
      */
@@ -18,6 +20,7 @@ class UserApiController extends Controller
     {
         $validator = Validator::make($request->all(), [
             'name' => 'required|string|max:255',
+            'surname' => 'nullable|string|max:255',
             'email' => 'required|string|email|max:255|unique:users',
             'password' => 'required|string|min:8',
         ]);
@@ -28,6 +31,7 @@ class UserApiController extends Controller
 
         $user = User::create([
             'name' => $request->name,
+            'surname' => $request->surname,
             'email' => $request->email,
             'password' => Hash::make($request->password),
         ]);
@@ -36,6 +40,8 @@ class UserApiController extends Controller
     }
 
     /**
+     * Metod get user
+     *
      * @param $id
      * @return \Illuminate\Http\JsonResponse
      */
@@ -51,50 +57,45 @@ class UserApiController extends Controller
     }
 
     /**
+     * Metod update user
+     *
      * @param Request $request
      * @param int $id
      * @return \Illuminate\Http\JsonResponse
      */
     public function update(Request $request, int $id)
     {
-        // Знайти користувача за ID
         $user = User::find($id);
 
         if (!$user) {
             return response()->json(['message' => 'User not found'], 404);
         }
-
-        // Валідність введених даних
         $validated = $request->validate([
             'name' => 'required|string|max:255',
+            'surname' => 'nullable|string|max:255',
             'email' => 'required|email|unique:users,email,' . $id,
             'password' => 'nullable|string|min:8|confirmed',
         ]);
-
-        // Оновлення даних користувача
         $user->update($validated);
 
-        // Повернення оновлених даних користувача
         return response()->json($user, 200);
     }
 
     /**
+     * Metod delete user
+     *
      * @param int $id
      * @return \Illuminate\Http\JsonResponse
      */
     public function destroy(int $id)
     {
-        // Знайти користувача за ID
         $user = User::find($id);
 
         if (!$user) {
             return response()->json(['message' => 'User not found'], 404);
         }
-
-        // Видалити користувача
         $user->delete();
 
-        // Повернути відповідь про успішне видалення
         return response()->json(['message' => 'User deleted successfully'], 200);
     }
 }
