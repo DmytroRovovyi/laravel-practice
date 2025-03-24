@@ -1,13 +1,14 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\Api\UserController;
-use App\Http\Controllers\Api\AuthController;
+use App\Http\Controllers\Api\UserApiController;
+use App\Http\Controllers\Api\AuthApiController;
 
 // Create api users.
-Route::post('/users', [UserController::class, 'store']);
-Route::middleware('auth:sanctum')->get('/users/{id}', [UserController::class, 'show']);
-Route::put('/users/{id}', [UserController::class, 'update']);
-Route::delete('/users/{id}', [UserController::class, 'destroy']);
+Route::post('/users', [UserApiController::class, 'store']);
+Route::middleware('auth:sanctum')->get('/users/{id}', [UserApiController::class, 'show']);
+Route::put('/users/{id}', [UserApiController::class, 'update']);
+Route::delete('/users/{id}', [UserApiController::class, 'destroy']);
 
-Route::post('/login', [AuthController::class, 'login']);
+// Login api users.
+Route::post('/login', [AuthApiController::class, 'login']);
