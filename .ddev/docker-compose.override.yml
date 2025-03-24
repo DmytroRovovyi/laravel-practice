@@ -1,0 +1,7 @@
+version: '3.7'
+services:
+  web:
+    ports:
+      - "5176:5176"
+    environment:
+      - VITE_HTTPS=true
