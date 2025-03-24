@@ -18,6 +18,7 @@ class UserApiController extends Controller
     {
         $validator = Validator::make($request->all(), [
             'name' => 'required|string|max:255',
+            'surname' => 'nullable|string|max:255',
             'email' => 'required|string|email|max:255|unique:users',
             'password' => 'required|string|min:8',
         ]);
@@ -28,6 +29,7 @@ class UserApiController extends Controller
 
         $user = User::create([
             'name' => $request->name,
+            'surname' => $validatedData['surname'] ?? null,
             'email' => $request->email,
             'password' => Hash::make($request->password),
         ]);
@@ -57,24 +59,20 @@ class UserApiController extends Controller
      */
     public function update(Request $request, int $id)
     {
-        // Знайти користувача за ID
         $user = User::find($id);
 
         if (!$user) {
             return response()->json(['message' => 'User not found'], 404);
         }
 
-        // Валідність введених даних
         $validated = $request->validate([
             'name' => 'required|string|max:255',
+            'surname' => 'nullable|string|max:255',
             'email' => 'required|email|unique:users,email,' . $id,
             'password' => 'nullable|string|min:8|confirmed',
         ]);
-
-        // Оновлення даних користувача
         $user->update($validated);
 
-        // Повернення оновлених даних користувача
         return response()->json($user, 200);
     }
 
@@ -84,17 +82,13 @@ class UserApiController extends Controller
      */
     public function destroy(int $id)
     {
-        // Знайти користувача за ID
         $user = User::find($id);
 
         if (!$user) {
             return response()->json(['message' => 'User not found'], 404);
         }
-
-        // Видалити користувача
         $user->delete();
 
-        // Повернути відповідь про успішне видалення
         return response()->json(['message' => 'User deleted successfully'], 200);
     }
 }
