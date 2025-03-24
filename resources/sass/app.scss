@@ -1,0 +1,41 @@
+/* resources/sass/app.scss */
+@use 'tailwindcss/base';
+@use 'tailwindcss/components';
+@use 'tailwindcss/utilities';
+
+$background-dark: #333;
+$background-light: #f4f4f4;
+$background-red: #e70909;
+$text-color-light: white;
+$padding: 15px;
+
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+header, footer {
+    background-color: $background-dark;
+    color: $text-color-light;
+    text-align: center;
+    padding: $padding 0;
+}
+
+main {
+    display: flex;
+    flex-grow: 1;
+}
+
+.sidebar {
+    width: 20%;
+    background-color: $background-red;
+    padding: $padding;
+}
+
+.content {
+    flex-grow: 1;
+    padding: $padding;
+}
