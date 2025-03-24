@@ -11,6 +11,8 @@ use Illuminate\Support\Facades\Validator;
 class UserApiController extends Controller
 {
     /**
+     * Metod create user
+     *
      * @param Request $request
      * @return \Illuminate\Http\JsonResponse
      */
@@ -29,7 +31,7 @@ class UserApiController extends Controller
 
         $user = User::create([
             'name' => $request->name,
-            'surname' => $validatedData['surname'] ?? null,
+            'surname' => $request->surname,
             'email' => $request->email,
             'password' => Hash::make($request->password),
         ]);
@@ -38,6 +40,8 @@ class UserApiController extends Controller
     }
 
     /**
+     * Metod get user
+     *
      * @param $id
      * @return \Illuminate\Http\JsonResponse
      */
@@ -53,6 +57,8 @@ class UserApiController extends Controller
     }
 
     /**
+     * Metod update user
+     *
      * @param Request $request
      * @param int $id
      * @return \Illuminate\Http\JsonResponse
@@ -77,6 +83,8 @@ class UserApiController extends Controller
     }
 
     /**
+     * Metod delete user
+     *
      * @param int $id
      * @return \Illuminate\Http\JsonResponse
      */
