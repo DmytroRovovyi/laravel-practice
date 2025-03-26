@@ -35,7 +35,19 @@
 
 <main>
     <div class="content">
-        <p>Основний контент</p>
+        <div class="articles">
+            @foreach ($articles as $article)
+                <div class="article">
+                    <h2>{{ $article->title }}</h2>
+                    <img src="{{ asset('storage/' . $article->image) }}" alt="Article Image">
+                    <p>{{ $article->body }}</p>
+                </div>
+            @endforeach
+        </div>
+
+        <div class="pagination">
+            {{ $articles->links() }}
+        </div>
     </div>
     <div class="sidebar">
         <p>Контент справа</p>

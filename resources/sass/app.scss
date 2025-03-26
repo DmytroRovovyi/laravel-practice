@@ -3,6 +3,7 @@
 @use 'tailwindcss/components';
 @use 'tailwindcss/utilities';
 @use "./main-menu";
+@use "./article";
 @use "./variables" as *;
 
 body {
@@ -11,6 +12,9 @@ body {
     padding: 0;
     background: url('/public/images/pxfuel.jpg') no-repeat center center;
     background-size: cover;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
 }
 
 main {
@@ -20,6 +24,7 @@ main {
     max-width: 1200px;
     margin: 0 auto;
     padding: 20px;
+    flex-grow: 1;
 }
 
 header {
@@ -59,5 +64,3 @@ footer {
     margin-top: 40px;
     line-height: 1.6;
 }
-
-
