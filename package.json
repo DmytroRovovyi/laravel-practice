@@ -30,6 +30,7 @@
         "ansi-regex": "^5.0.1",
         "ansi-styles": "^4.3.0",
         "asynckit": "^0.4.0",
+        "bootstrap": "^4.6.2",
         "braces": "^3.0.3",
         "browserslist": "^4.24.4",
         "call-bind-apply-helpers": "^1.0.2",

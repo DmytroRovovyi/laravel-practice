@@ -15,7 +15,6 @@
             </a>
             <nav>
                 <ul class="main-menu">
-                    <li><a href="/">Головна</a></li>
                     <li><a href="/about">Про нас</a></li>
                     <li><a href="/services">Послуги</a></li>
                     <li><a href="/contact">Контакти</a></li>
@@ -45,7 +44,7 @@
             @endforeach
         </div>
 
-        <div class="pagination">
+        <div class="pagination justify-content-center">
             {{ $articles->links() }}
         </div>
     </div>
