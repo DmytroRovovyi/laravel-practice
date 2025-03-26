@@ -1,0 +1,43 @@
+@use "./variables" as *;
+
+header {
+    .header, .logo {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+    .logo {
+        img {
+            width: 100px;
+            height: auto;
+            margin-right: 0;
+        }
+    }
+
+    nav {
+        ul.main-menu,
+        ul.login-menu {
+            display: flex;
+            margin: 0;
+            padding: 0;
+
+            li {
+                margin-right: 20px;
+
+                &:last-child {
+                    margin-right: 0;
+                }
+
+                a {
+                    text-decoration: none;
+                    color: $secondary-color;
+                    font-weight: bold;
+
+                    &:hover {
+                        color: $text-color-hover;
+                    }
+                }
+            }
+        }
+    }
+}

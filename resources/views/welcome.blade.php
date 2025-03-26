@@ -8,7 +8,29 @@
 </head>
 <body>
 <header>
-    <h1>Моя Головна Сторінка</h1>
+    <div class="header">
+        <div class="logo">
+            <a href="/">
+                <img src={{ asset('images/Laravel-Logo.wine.svg') }} alt="Logo" width="100" />
+            </a>
+            <nav>
+                <ul class="main-menu">
+                    <li><a href="/">Головна</a></li>
+                    <li><a href="/about">Про нас</a></li>
+                    <li><a href="/services">Послуги</a></li>
+                    <li><a href="/contact">Контакти</a></li>
+                </ul>
+            </nav>
+        </div>
+        <div class="login-nav">
+            <nav>
+                <ul class="login-menu">
+                    <li><a href="/login">login</a></li>
+                    <li><a href="/register">register</a></li>
+                </ul>
+            </nav>
+        </div>
+    </div>
 </header>
 
 <main>
@@ -21,7 +43,7 @@
 </main>
 
 <footer>
-    <p>&copy; 2025 Моя Компанія</p>
+    <p>&copy; <?php echo date("Y"); ?> Laravel practice</p>
 </footer>
 </body>
 </html>
