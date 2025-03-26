@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Controller;
 use App\Models\Article;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class ArticleApiController extends Controller
 {
@@ -19,10 +20,29 @@ class ArticleApiController extends Controller
         $validated = $request->validate([
             'title' => 'required|string|max:255',
             'body' => 'required',
+            'image' => 'nullable|string',
         ]);
 
         $article = new Article($validated);
         $article->user_id = auth()->id();
+
+        if ($request->has('image')) {
+            $imageData = $request->input('image');
+            if (empty($imageData)) {
+                return response()->json(['error' => 'Image data is empty'], 400);
+            }
+
+            if (preg_match('/^data:image\/(\w+);base64,/', $imageData, $type)) {
+                $imageData = substr($imageData, strpos($imageData, ',') + 1);
+                $imageData = base64_decode($imageData);
+                $imageName = uniqid() . '.' . $type[1];
+                Storage::disk('public')->put('images/' . $imageName, $imageData);
+
+                $article->image = 'images/' . $imageName;
+            } else {
+                return response()->json(['error' => 'Invalid image format'], 400);
+            }
+        }
         $article->save();
 
         return response()->json($article, 201);
@@ -57,10 +77,29 @@ class ArticleApiController extends Controller
         $validated = $request->validate([
             'title' => 'required|string|max:255',
             'body' => 'required',
+            'image' => 'nullable|string',
         ]);
+
+        if ($request->has('image')) {
+            $imageData = $request->input('image');
+            if (empty($imageData)) {
+                return response()->json(['error' => 'Image data is empty'], 400);
+            }
+
+            if (preg_match('/^data:image\/(\w+);base64,/', $imageData, $type)) {
+                $imageData = substr($imageData, strpos($imageData, ',') + 1);
+                $imageData = base64_decode($imageData);
+                $imageName = uniqid() . '.' . $type[1]; // Генеруємо унікальне ім'я зображення
+                Storage::disk('public')->put('images/' . $imageName, $imageData);
+
+                $article->image = 'images/' . $imageName;
+            } else {
+                return response()->json(['error' => 'Invalid image format'], 400);
+            }
+        }
+
         $article->update($validated);
 
-        return response()->json($article);
     }
 
     /**
