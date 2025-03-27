@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
-    <title>Home page</title>
+    <title>Головна сторінка</title>
     @vite(['resources/js/app.js', 'resources/sass/app.scss'])
 </head>
 <body>
@@ -16,21 +16,18 @@
             </a>
             <nav>
                 <ul class="main-menu">
+                    <li><a href="/">Головна</a></li>
                     <li><a href="/about">Про нас</a></li>
                     <li><a href="/services">Послуги</a></li>
-                    <li><a href="/dashboard">Dashboard</a></li>
+                    <li><a href="/contact">Контакти</a></li>
                 </ul>
             </nav>
         </div>
         <div class="login-nav">
             <nav>
                 <ul class="login-menu">
-                    @guest
-                        <li><a href="/login">Login</a></li>
-                        <li><a href="/register">Register</a></li>
-                    @else
-                        <li><a href="/profile">Profile</a></li>
-                    @endguest
+                    <li><a href="/login">login</a></li>
+                    <li><a href="/register">register</a></li>
                 </ul>
             </nav>
         </div>
@@ -49,12 +46,26 @@
             @endforeach
         </div>
 
-        <div class="pagination justify-content-center">
+        <div class="pagination">
             {{ $articles->links() }}
         </div>
     </div>
     <div class="sidebar">
-        <p>Контент справа</p>
+        <div class="videos">
+            @if(isset($videos['items']) && is_array($videos['items']))
+                @foreach ($videos['items'] as $video)
+                    <div class="video">
+                        @if(isset($video['snippet']['resourceId']['videoId']))
+                            <iframe width="350" height="300" src="https://www.youtube.com/embed/{{ $video['snippet']['resourceId']['videoId'] }}" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                        @else
+                            <p>No video available.</p>
+                        @endif
+                    </div>
+                @endforeach
+            @else
+                <p>No videos available.</p>
+            @endif
+        </div>
     </div>
 </main>
 
