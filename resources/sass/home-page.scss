@@ -13,9 +13,9 @@ body {
 
 main {
     display: grid;
-    grid-template-columns: 1fr 300px;
+    grid-template-columns: 1fr 400px;
     gap: 20px;
-    max-width: 1200px;
+    max-width: 1400px;
     margin: 0 auto;
     padding: 20px;
     flex-grow: 1;
@@ -84,4 +84,21 @@ footer {
         }
     }
 }
+
+.video {
+    margin-bottom: 20px;
+}
+
+.videos {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+}
+
+.video iframe {
+    border-radius: 10px;
+    max-width: 100%;
+}
+
 
