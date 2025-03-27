@@ -3,7 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Головна сторінка</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <title>Home page</title>
     @vite(['resources/js/app.js', 'resources/sass/app.scss'])
 </head>
 <body>
@@ -15,18 +16,21 @@
             </a>
             <nav>
                 <ul class="main-menu">
-                    <li><a href="/">Головна</a></li>
                     <li><a href="/about">Про нас</a></li>
                     <li><a href="/services">Послуги</a></li>
-                    <li><a href="/contact">Контакти</a></li>
+                    <li><a href="/dashboard">Dashboard</a></li>
                 </ul>
             </nav>
         </div>
         <div class="login-nav">
             <nav>
                 <ul class="login-menu">
-                    <li><a href="/login">login</a></li>
-                    <li><a href="/register">register</a></li>
+                    @guest
+                        <li><a href="/login">Login</a></li>
+                        <li><a href="/register">Register</a></li>
+                    @else
+                        <li><a href="/profile">Profile</a></li>
+                    @endguest
                 </ul>
             </nav>
         </div>
@@ -45,7 +49,7 @@
             @endforeach
         </div>
 
-        <div class="pagination">
+        <div class="pagination justify-content-center">
             {{ $articles->links() }}
         </div>
     </div>
