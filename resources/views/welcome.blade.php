@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
-    <title>Головна сторінка</title>
+    <title>Home page</title>
     @vite(['resources/js/app.js', 'resources/sass/app.scss'])
 </head>
 <body>
@@ -16,18 +16,21 @@
             </a>
             <nav>
                 <ul class="main-menu">
-                    <li><a href="/">Головна</a></li>
                     <li><a href="/about">Про нас</a></li>
-                    <li><a href="/services">Послуги</a></li>
-                    <li><a href="/contact">Контакти</a></li>
+                    <li><a href="/wikipedia">Wikipedia</a></li>
+                    <li><a href="/dashboard">Dashboard</a></li>
                 </ul>
             </nav>
         </div>
         <div class="login-nav">
             <nav>
                 <ul class="login-menu">
-                    <li><a href="/login">login</a></li>
-                    <li><a href="/register">register</a></li>
+                    @guest
+                        <li><a href="/login">login</a></li>
+                        <li><a href="/register">register</a></li>
+                    @else
+                        <li><a href="/profile">profile</a></li>
+                    @endguest
                 </ul>
             </nav>
         </div>
@@ -35,7 +38,7 @@
 </header>
 
 <main>
-    <div class="content">
+    <div class="content container mx-auto">
         <div class="articles">
             @foreach ($articles as $article)
                 <div class="article">
@@ -50,7 +53,7 @@
             {{ $articles->links() }}
         </div>
     </div>
-    <div class="sidebar">
+    <div class="sidebar container mx-auto">
         <div class="videos">
             @if(isset($videos['items']) && is_array($videos['items']))
                 @foreach ($videos['items'] as $video)
