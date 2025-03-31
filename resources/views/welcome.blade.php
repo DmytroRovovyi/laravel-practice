@@ -16,7 +16,7 @@
             </a>
             <nav>
                 <ul class="main-menu">
-                    <li><a href="/about">Про нас</a></li>
+                    <li><a href="/wikipage">Wikipage</a></li>
                     <li><a href="/wikipedia">Wikipedia</a></li>
                     <li><a href="/dashboard">Dashboard</a></li>
                 </ul>
