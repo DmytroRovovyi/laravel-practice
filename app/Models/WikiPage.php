@@ -9,6 +9,8 @@ class WikiPage extends Model
 {
     use HasFactory;
 
+    protected $table = 'wiki_page';
+
     protected $fillable = [
         'title',
         'body'

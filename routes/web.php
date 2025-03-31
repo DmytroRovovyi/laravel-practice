@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\WikiController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ArticleController;
 use App\Http\Controllers\YouTubeController;
@@ -22,5 +23,8 @@ Route::middleware('auth')->group(function () {
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
+
+Route::get('upload-form', [WikiController::class, 'showForm'])->name('titles.upload.form');
+Route::post('fetch-page', [WikiController::class, 'fetchPage'])->name('titles.fetch');
 
 require __DIR__.'/auth.php';
