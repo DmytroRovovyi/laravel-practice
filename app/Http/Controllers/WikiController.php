@@ -7,7 +7,11 @@ use Illuminate\Http\Request;
 
 class WikiController extends Controller
 {
-    // Показати форму для завантаження
+    /**
+     * Get show display form upload.
+     *
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View|\Illuminate\Foundation\Application
+     */
     public function showForm()
     {
         return view('upload');
