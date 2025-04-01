@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\UserApiController;
 use App\Http\Controllers\Api\AuthApiController;
 use App\Http\Controllers\Api\ArticleApiController;
+use App\Http\Controllers\Api\WikiApiController;
 
 // Users api.
 Route::post('/users', [UserApiController::class, 'store']);
@@ -22,4 +23,9 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::get('/articles/{id}', [ArticleApiController::class, 'show']);
     Route::put('/articles/{id}', [ArticleApiController::class, 'update']);
     Route::delete('/articles/{id}', [ArticleApiController::class, 'destroy']);
+});
+
+// Wikipedia api.
+Route::middleware('auth:sanctum')->group(function () {
+    Route::post('/wiki/store', [WikiApiController::class, 'store']);
 });
