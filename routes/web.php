@@ -6,6 +6,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ArticleController;
 use App\Http\Controllers\YouTubeController;
 use App\Http\Controllers\SearchController;
+use App\Http\Controllers\UserNotificationController;
 
 
 Route::get('/', [ArticleController::class, 'index'])->name('home');
@@ -26,5 +27,7 @@ Route::middleware('auth')->group(function () {
 
 Route::get('upload-form', [WikiController::class, 'showForm'])->name('titles.upload.form');
 Route::post('fetch-page', [WikiController::class, 'fetchPage'])->name('titles.fetch');
+
+Route::get('/send-email/{userId}/{messageContent}', [UserNotificationController::class, 'sendEmail']);
 
 require __DIR__.'/auth.php';
