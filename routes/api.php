@@ -5,6 +5,8 @@ use App\Http\Controllers\Api\UserApiController;
 use App\Http\Controllers\Api\AuthApiController;
 use App\Http\Controllers\Api\ArticleApiController;
 use App\Http\Controllers\Api\WikiApiController;
+use App\Http\Controllers\Api\UserApiNotificationController;
+
 
 // Users api.
 Route::post('/users', [UserApiController::class, 'store']);
@@ -28,4 +30,10 @@ Route::middleware('auth:sanctum')->group(function () {
 // Wikipedia api.
 Route::middleware('auth:sanctum')->group(function () {
     Route::post('/wiki/store', [WikiApiController::class, 'store']);
+});
+
+// Email users api.
+Route::middleware('auth:sanctum')->group(function () {
+    Route::post('/send-email-to-all', [UserApiNotificationController::class, 'sendEmailToAll']);
+    Route::get('/send-email/{userId}/{messageContent}', [UserApiNotificationController::class, 'sendEmail']);
 });
