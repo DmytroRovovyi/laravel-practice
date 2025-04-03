@@ -5,3 +5,13 @@ services:
       - "5176:5176"
     environment:
       - VITE_HTTPS=true
+  mailhog:
+    image: mailhog/mailhog
+    container_name: mailhog
+    ports:
+      - "8027:8025"
+      - "1025:1025"
+    environment:
+      - MAILHOG_API=http://mailhog:8027
+      - MAIL_HOST=mailhog
+      - MAIL_PORT=1025
